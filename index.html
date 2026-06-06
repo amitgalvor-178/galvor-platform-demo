@@ -238,6 +238,124 @@ body { display:flex; background:var(--bg); color:var(--text); font-family:-apple
 .er-reveal { animation:erFadeUp 0.4s cubic-bezier(0.22,1,0.36,1) both; }
 /* ─── BRAND DNA ─── */
 #screen-brand-dna { background:var(--bg); }
+
+/* ── Galvor AI Chat Widget ── */
+#ai-fab {
+  position: fixed; bottom: 28px; right: 28px; z-index: 9999;
+  display: flex; align-items: center; gap: 9px;
+  padding: 13px 22px; background: linear-gradient(135deg,#c4870c,#7c3300);
+  border: none; border-radius: 100px; color: #fff;
+  font-size: 13.5px; font-weight: 700; font-family: inherit; cursor: pointer;
+  box-shadow: 0 4px 24px rgba(196,135,12,0.45); transition: all 0.2s; letter-spacing: 0.01em;
+}
+#ai-fab:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(196,135,12,0.6); }
+.ai-fab-pulse {
+  width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.9);
+  animation: aiFabP 2s ease-in-out infinite;
+}
+@keyframes aiFabP { 0%,100%{opacity:.9;transform:scale(1);} 50%{opacity:.4;transform:scale(.65);} }
+
+#ai-panel {
+  position: fixed; bottom: 100px; right: 28px; width: 390px; height: 580px;
+  background: #fff; border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.18),0 4px 16px rgba(0,0,0,0.07);
+  z-index: 9998; display: flex; flex-direction: column; overflow: hidden;
+  transform: translateY(24px) scale(0.96); opacity: 0; pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+#ai-panel.ai-open { transform: translateY(0) scale(1); opacity: 1; pointer-events: all; }
+
+#ai-ph {
+  background: linear-gradient(135deg,#c4870c,#7c3300);
+  padding: 14px 18px; display: flex; align-items: center;
+  justify-content: space-between; flex-shrink: 0;
+}
+.ai-ph-info { display: flex; align-items: center; gap: 11px; }
+.ai-ph-av {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,0.18); border: 1.5px solid rgba(255,255,255,0.3);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.ai-ph-name { font-size: 14px; font-weight: 800; color: #fff; }
+.ai-ph-sub { font-size: 11px; color: rgba(255,255,255,0.72); margin-top: 1px; }
+.ai-ph-sub::before { content: "●"; color: #86efac; font-size: 8px; margin-right: 4px; vertical-align: 1px; }
+#ai-x {
+  background: rgba(255,255,255,0.15); border: none; border-radius: 50%;
+  width: 28px; height: 28px; cursor: pointer; display: flex; align-items: center;
+  justify-content: center; color: #fff; transition: background 0.15s; flex-shrink: 0;
+}
+#ai-x:hover { background: rgba(255,255,255,0.28); }
+
+#ai-msgs {
+  flex: 1; overflow-y: auto; padding: 14px 14px 6px;
+  display: flex; flex-direction: column; gap: 10px; background: #fafaf8;
+}
+.ai-m { display: flex; flex-direction: column; gap: 4px; max-width: 90%; }
+.ai-m-bot { align-self: flex-start; }
+.ai-m-user { align-self: flex-end; }
+.ai-m-bub {
+  padding: 10px 14px; border-radius: 16px;
+  font-size: 12.5px; line-height: 1.58; font-family: inherit;
+}
+.ai-m-bot .ai-m-bub {
+  background: #fff; border: 1px solid rgba(0,0,0,0.09); color: #0f172a;
+  border-radius: 4px 16px 16px 16px;
+}
+.ai-m-user .ai-m-bub {
+  background: linear-gradient(135deg,#c4870c,#7c3300); color: #fff;
+  border-radius: 16px 4px 16px 16px;
+}
+.ai-m-bot .ai-m-bub strong { font-weight: 700; }
+.ai-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 9px; border-radius: 20px;
+  background: rgba(196,135,12,0.08); border: 1px solid rgba(196,135,12,0.2);
+  font-size: 10.5px; font-weight: 600; color: #c4870c; margin-top: 3px;
+}
+.ai-typing-w { align-self: flex-start; }
+.ai-typing {
+  padding: 10px 16px; background: #fff; border: 1px solid rgba(0,0,0,0.09);
+  border-radius: 4px 16px 16px 16px; display: flex; gap: 5px; align-items: center;
+}
+.ai-typing span {
+  width: 6px; height: 6px; background: #c4870c; border-radius: 50%;
+  animation: aiDot 1.2s ease-in-out infinite;
+}
+.ai-typing span:nth-child(2){animation-delay:.2s;} .ai-typing span:nth-child(3){animation-delay:.4s;}
+@keyframes aiDot { 0%,60%,100%{opacity:.2;transform:scale(.8);} 30%{opacity:1;transform:scale(1);} }
+
+#ai-chips {
+  padding: 8px 12px; display: flex; flex-wrap: wrap; gap: 6px;
+  flex-shrink: 0; background: #fafaf8; border-top: 1px solid rgba(0,0,0,0.06);
+  min-height: 0;
+}
+#ai-chips:empty { padding: 0; border: none; }
+.ai-chip {
+  padding: 5px 12px; border-radius: 20px; cursor: pointer; font-family: inherit;
+  border: 1.5px solid rgba(196,135,12,0.3); background: rgba(196,135,12,0.05);
+  color: #c4870c; font-size: 12px; font-weight: 600; transition: all 0.15s; white-space: nowrap;
+}
+.ai-chip:hover { background: rgba(196,135,12,0.13); border-color: rgba(196,135,12,0.55); }
+
+#ai-inp-row {
+  padding: 10px 12px; display: flex; align-items: center; gap: 8px;
+  border-top: 1px solid rgba(0,0,0,0.08); background: #fff; flex-shrink: 0;
+}
+#ai-inp {
+  flex: 1; padding: 9px 14px; border: 1.5px solid rgba(0,0,0,0.12);
+  border-radius: 100px; font-size: 13px; font-family: inherit;
+  color: #0f172a; outline: none; background: #fafaf8; transition: border-color 0.15s;
+}
+#ai-inp:focus { border-color: rgba(196,135,12,0.5); }
+#ai-inp::placeholder { color: #94a3b8; }
+#ai-send {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg,#c4870c,#7c3300);
+  border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: all 0.15s;
+}
+#ai-send:hover { opacity: 0.88; transform: scale(1.06); }
+
 </style>
 </head>
 <body>
@@ -5362,6 +5480,243 @@ function addCompetitor() {
 
 // init
 goPanel(0);
+
+// ════════════════════════════════════════
+// GALVOR AI CHAT ASSISTANT
+// ════════════════════════════════════════
+
+let _aiOpen = false, _aiInited = false;
+
+function toggleAI() {
+  _aiOpen = !_aiOpen;
+  document.getElementById('ai-panel').classList.toggle('ai-open', _aiOpen);
+  if (_aiOpen) {
+    if (!_aiInited) { _aiInited = true; setTimeout(_aiGreet, 380); }
+    setTimeout(() => document.getElementById('ai-inp').focus(), 320);
+  }
+}
+
+const AI_KB = [
+  { w:3, k:['hello','hi','hey','what can you do','help','capabilities','how does this work','start'],
+    r:`Hey! I'm Galvor AI — I run the entire campaign flow for you, just by chatting.\n\nHere's what I can do:\n\n• **Start & set up** a campaign (objective, audience, content plan)\n• **Generate concepts** — AI-powered creative directions\n• **Match creators** — ranked by Brand DNA + predicted RoAS\n• **Build creative briefs** — ready to approve & send\n• **Analyse Brand DNA** — themes, colours, tone, values\n• **Compare ad performance** — butterfly charts & creative matrix\n• **Browse content clusters** — winning, mid, losing themes\n\nWhat would you like to do?`,
+    c:['🚀 Start a campaign','👥 Find creators','🧬 Brand DNA','📊 Performance'], a:null },
+
+  { w:3, k:['start campaign','new campaign','create campaign','launch campaign','setup campaign','campaign setup','set up','begin','kick off'],
+    r:`Opening **Campaign Setup** for MaisonX's men's campaign.\n\nYou'll set:\n• **Objective** — Brand Awareness / Performance / Launch\n• **Content Plan** — describe the campaign goal\n• **Audience** — age, city tier, interests\n\nOnce filled, hit "Generate Concepts →" and I'll bring back 3 creative directions.`,
+    c:['Generate concepts next','Set objective: Performance','Fill audience details'],
+    badge:'Navigating → Campaign Setup', a:()=>showScreen('step1') },
+
+  { w:3, k:['concept','concepts','idea','ideas','creative direction','generate concept','creative ideas','content idea','what concepts'],
+    r:`Here are the 3 AI-generated concepts for MaisonX:\n\n1. **"Too Good to Be True?"** — Blind quality challenge, bold_claim hook\n2. **"Spot the Difference"** — Price vs quality narrative, curiosity_gap hook\n3. **"The ₹1799 Secret"** — Value unlock reveal, problem_statement hook\n\nAll scored against your Brand DNA. Want me to move to Creator Recommendations?`,
+    c:['View concepts','Assign to creators','Generate brief'],
+    badge:'Navigating → Concept Generation', a:()=>showScreen('step2') },
+
+  { w:3, k:['creator','creators','influencer','influencers','recommend','find creator','match creator','who should i use','best creator','top creator'],
+    r:`Scanned **847 creator profiles** — here are the top 3 for MaisonX:\n\n1. **Manvendra Singh** — Brand DNA: 91% · RoAS Score: 92/100 ⭐ Galvor's Pick\n2. **Aniket Sharma** — Brand DNA: 87% · Content Fit: 91%\n3. **Janak Mehta** — Brand DNA: 79% · ER: 11.2%\n\nManvendra is the standout. Want me to assign him and open the brief?`,
+    c:['Assign Manvendra → Brief','View all scores','Find more creators'],
+    badge:'Navigating → Creator Recommendations', a:()=>showScreen('step3') },
+
+  { w:4, k:['assign manvendra','manvendra','select manvendra','top pick','galvor pick','creator 1'],
+    r:`Assigning **Manvendra Singh** and opening his Creative Brief.\n\n• Brand DNA match: **91%**\n• Concept fit: **89%** — best for "Too Good to Be True?"\n• Predicted RoAS score: **92/100**\n\nThe brief is fully generated — reference content, industry trends, and past winning formats included. Ready to approve?`,
+    c:['Approve & send','Edit concept','Back to creators'],
+    badge:'Assigning Manvendra → Creative Brief', a:()=>{ selectCreator(1); showScreen('step5'); } },
+
+  { w:3, k:['brief','creative brief','generate brief','brief generation','make brief','create brief','build brief'],
+    r:`Opening the **Creative Brief**.\n\nIt includes:\n• **Concept** — "Too Good to Be True?" with execution notes\n• **Past Brand Content** — 3 reference thumbnails\n• **Industry Trends** — bold_claim × product_demo at 2.58x RoAS\n• **Creator's Past Hits** — 2 high-performing content examples\n\nApprove it and it goes straight to the creator.`,
+    c:['Approve & send','Edit brief','Back to creators'],
+    badge:'Navigating → Creative Brief', a:()=>{ selectCreator(1); showScreen('step5'); } },
+
+  { w:3, k:['brand dna','dna','brand identity','brand analysis','brand values','brand personality','analyse brand','brand signals','brand profile'],
+    r:`Running Brand DNA analysis for **MaisonX**…\n\nI'll read across:\n• Visual themes & aesthetic patterns\n• Typography & font personality\n• Colour palette extraction\n• Values communicated\n• Language & words used\n• Tone of voice\n• Content format preferences\n• Audience sentiment signals\n\nThis DNA conditions every creator match and concept recommendation.`,
+    c:['View colour palette','Edit brand values','Run new analysis'],
+    badge:'Navigating → Brand DNA', a:()=>showScreen('brand-dna') },
+
+  { w:3, k:['competitor','competitors','competition','rival','benchmark','competitive','who are my competitors','zara','andamen','vahro'],
+    r:`Opening **Competitor Mapping** for MaisonX.\n\nCurrently tracked:\n• **Zara** — fast fashion, high volume\n• **Andamen** — direct competitor, premium menswear\n• **Vahro** — luxury basics, similar positioning\n\nI can cross-analyse their ad hooks and formats in the Compare screen to surface your content gaps.`,
+    c:['Compare ad strategies','View content gaps','Add a competitor'],
+    badge:'Navigating → Competitor Mapping', a:()=>showScreen('competitors') },
+
+  { w:3, k:['performance','roas','analytics','metrics','stats','results','how is it performing','roi','numbers','kpis'],
+    r:`**MaisonX campaign performance snapshot:**\n\n• Average RoAS: **3.2x**\n• Top hook: **bold_claim** (47.3% of spend)\n• Top format: **lifestyle** (35.5% of spend)\n• 🚀 Outlier: other × static_graphic = **12.10x RoAS**\n\nThat 12.10x outlier is a massive signal — it's in a low-spend cell that's dramatically outperforming. I'd recommend scaling experiments there.`,
+    c:['Open creative matrix','View Meta Ads','See full overview'],
+    badge:'Navigating → Overview', a:()=>showScreen('overview') },
+
+  { w:3, k:['meta ads','meta','facebook ads','instagram ads','ad performance','ad data','ad library','paid ads'],
+    r:`Opening the **Meta Ads Performance** dashboard.\n\nYou'll see:\n• Campaign-level spend & impressions\n• Creative performance by hook & format\n• Top and bottom performing ads\n• Trend lines over your campaign period`,
+    c:['Filter by hook','See top ads','Compare campaigns'],
+    badge:'Navigating → Ad Performance', a:()=>showScreen('meta-ads') },
+
+  { w:3, k:['browse','browse content','content library','ad library','explore content','see all ads','content bank'],
+    r:`Opening the **Content Library** — browse all your ads by tag, format, and performance.\n\nFilter options:\n• **Hook** — bold_claim, curiosity_gap, problem_statement…\n• **Format** — lifestyle, product_demo, talking_head, static_graphic…\n• **Platform** — Meta, YouTube\n• **Score** — filter by RoAS threshold`,
+    c:['Filter: bold_claim','Filter: lifestyle','Filter: top performers'],
+    badge:'Navigating → Browse Content', a:()=>showScreen('browse-content') },
+
+  { w:3, k:['compare','comparison','versus','own vs','competitor vs','gap analysis','compare ads','what is different'],
+    r:`Opening **Compare** — dual-view analysis.\n\n• **Own Media tab** — butterfly charts: MaisonX vs competitors across Product Category, Value Prop, Tag Format, Tag Hook\n• **Competition tab** — Creative Matrix heatmap (hook × format with RoAS per cell)\n\n💡 Key gap: **comfort** is 16.9% competitor spend vs only 2.5% yours — a clear opportunity.`,
+    c:['View creative matrix','Check gap analysis','Own Media tab'],
+    badge:'Navigating → Compare', a:()=>showScreen('compare') },
+
+  { w:4, k:['12.10','12x','outlier','best performing ad','highest roas','what works best','biggest signal','top roas'],
+    r:`🚀 Biggest signal in your data: **other × static_graphic = 12.10x RoAS**\n\nThis outlier in the Creative Matrix means a **static graphic ad** with an unconventional hook dramatically outperformed every other cell.\n\nRecommendation: run 3-5 static graphic experiments with varied hook types. The upside here is massive — you're currently underinvested in this format.`,
+    c:['Open creative matrix','Start campaign around this','View full matrix'],
+    badge:'Opening Compare → Competition tab', a:()=>{ showScreen('compare'); setTimeout(()=>cmpTab('comp'),500); } },
+
+  { w:3, k:['cluster','clusters','theme','themes','winning themes','losing themes','content themes','creative themes'],
+    r:`Opening **Content Clusters** — your creative themes ranked by performance.\n\n🟢 **Winning:**\n• Linen Collection Story — 3.8x RoAS, 18 creatives\n• Fabric Quality Focus — 3.4x RoAS, 23 creatives\n\n🔴 **Losing:**\n• Seasonal Sale Push — 0.9x RoAS\n• Discount Positioning — 0.82x RoAS (cut spend here)\n\nClick any theme card for the full pattern breakdown.`,
+    c:['View winning themes','See axes view','Go to Compare'],
+    badge:'Navigating → Clusters', a:()=>showScreen('clusters') },
+
+  { w:3, k:['axes','axis','scatter','2x2','quadrant','performance scatter','performance plot'],
+    r:`Opening the **Axes** view — a 2D scatter across any two performance dimensions.\n\nPlot your library by:\n• Hook type vs Format type\n• Spend vs RoAS\n• Audience segment vs conversion\n\nThe scatter reveals outlier clusters worth scaling and dead zones to cut.`,
+    c:['View hook × format','Open Clusters','Compare screen'],
+    badge:'Navigating → Axes', a:()=>showScreen('axes') },
+
+  { w:3, k:['campaign list','all campaigns','past campaigns','my campaigns','list of campaigns','history'],
+    r:`Opening your **Campaign List** — all active and past campaigns with status, creator assignments, brief progress, and performance summary.`,
+    c:['Create new campaign','View MaisonX campaign'],
+    badge:'Navigating → Campaign List', a:()=>showScreen('campaignlist') },
+
+  { w:3, k:['what is galvor','about galvor','how does galvor work','explain galvor','what does galvor do','galvor platform'],
+    r:`**Galvor** is an AI-Native Creator Advertisement Platform.\n\nWe engineer revenue through 3 pillars:\n\n1. **Ad Performance Data** — analyse what's worked for your specific brand\n2. **Ad Library Benchmarking** — see what works across your industry\n3. **Brand DNA Fitment** — match creators whose identity aligns with your brand\n\n**Results:** 3.2x avg RoAS · 68% better creator fitment · 40% faster campaign launch`,
+    c:['Start a campaign','View performance','Brand DNA'], a:null },
+
+  { w:2, k:['budget','spend allocation','budget optimization','optimize budget','allocate budget','where to spend'],
+    r:`**Budget Optimization** is launching soon 🚀\n\nThis will AI-allocate spend across creators and formats — automatically shifting budget to what's performing.\n\nFor now, check the Compare screen for your current spend distribution across formats and hooks.`,
+    c:['View spend distribution','Compare screen'], a:null },
+
+  { w:2, k:['step 1','step 2','step 3','step 4','step 5','step 6','step one','step two','step three','step four','step five','step six'],
+    r:`Here's the full campaign flow:\n\n1. **Campaign Setup** — objective, content plan, audience\n2. **Concept Generation** — 3 AI creative directions\n3. **Creator Recommendations** — ranked by DNA + RoAS\n4. **Creative Brief** — full brief with references\n5. **Content Edits** — revision workflow\n6. **Ad Performance** — live campaign analytics`,
+    c:['Go to Step 1','Go to Step 3','Go to Brief'], a:null },
+];
+
+const AI_FALLBACK = {
+  r:`I didn't quite catch that — here are some things I can do:\n\n• "Start a new campaign for MaisonX"\n• "Show me the best creator matches"\n• "What's my RoAS?"\n• "Open Brand DNA"\n• "Compare my ads vs competitors"\n• "What's the 12.10x outlier?"\n\nWhat would you like?`,
+  c:['Start campaign','Find creators','Brand DNA','Performance']
+};
+
+function _aiScore(entry, txt) {
+  const t = txt.toLowerCase();
+  let s = 0;
+  for (const k of entry.k) if (t.includes(k)) s += entry.w * (k.split(' ').length > 1 ? 3 : 1);
+  return s;
+}
+
+function _aiFindResponse(txt) {
+  let best = null, top = 0;
+  for (const e of AI_KB) { const s = _aiScore(e, txt); if (s > top) { top = s; best = e; } }
+  return top > 0 ? best : null;
+}
+
+function _aiFmt(txt) {
+  return txt
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br>');
+}
+
+function _aiBot(text, chips, badge) {
+  const msgs = document.getElementById('ai-msgs');
+  const d = document.createElement('div');
+  d.className = 'ai-m ai-m-bot';
+  d.innerHTML = '<div class="ai-m-bub">' + _aiFmt(text) + '</div>' +
+    (badge ? '<div class="ai-badge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5-5 5m5-5H6"/></svg>' + badge + '</div>' : '');
+  msgs.appendChild(d);
+  _aiChips(chips);
+  msgs.scrollTop = 99999;
+}
+
+function _aiUser(text) {
+  const msgs = document.getElementById('ai-msgs');
+  const d = document.createElement('div');
+  d.className = 'ai-m ai-m-user';
+  d.innerHTML = '<div class="ai-m-bub">' + text + '</div>';
+  msgs.appendChild(d);
+  msgs.scrollTop = 99999;
+}
+
+function _aiTyping() {
+  const msgs = document.getElementById('ai-msgs');
+  const d = document.createElement('div');
+  d.id = 'ai-t'; d.className = 'ai-typing-w';
+  d.innerHTML = '<div class="ai-typing"><span></span><span></span><span></span></div>';
+  msgs.appendChild(d); msgs.scrollTop = 99999;
+}
+
+function _aiNoTyping() { const e = document.getElementById('ai-t'); if (e) e.remove(); }
+
+function _aiChips(chips) {
+  const c = document.getElementById('ai-chips');
+  c.innerHTML = '';
+  (chips || []).forEach(chip => {
+    const b = document.createElement('button');
+    b.className = 'ai-chip'; b.textContent = chip;
+    b.onclick = () => aiSend(chip.replace(/^[^\w]+/, ''));
+    c.appendChild(b);
+  });
+}
+
+function _aiGreet() {
+  _aiBot(
+    `Hey! I'm Galvor AI — I run the entire campaign flow for you, just by chatting.\n\nI can **start campaigns, generate concepts, match creators, build briefs, analyse your Brand DNA, compare ad performance**, and navigate anywhere in the platform.\n\nWhat would you like to do?`,
+    ['🚀 Start a campaign','👥 Find creators','🧬 Brand DNA','📊 Performance']
+  );
+}
+
+function aiSend(txt) {
+  const inp = document.getElementById('ai-inp');
+  const msg = (txt || inp.value).trim();
+  if (!msg) return;
+  inp.value = '';
+  _aiChips([]);
+  _aiUser(msg);
+  _aiTyping();
+  const delay = 580 + Math.random() * 520;
+  setTimeout(() => {
+    _aiNoTyping();
+    const entry = _aiFindResponse(msg);
+    if (entry) {
+      if (entry.a) entry.a();
+      _aiBot(entry.r, entry.c, entry.badge || null);
+    } else {
+      _aiBot(AI_FALLBACK.r, AI_FALLBACK.c);
+    }
+  }, delay);
+}
+
 </script>
+
+<!-- ── Galvor AI Chat Widget ── -->
+<button id="ai-fab" onclick="toggleAI()">
+  <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
+  </svg>
+  Galvor AI
+  <div class="ai-fab-pulse"></div>
+</button>
+
+<div id="ai-panel">
+  <div id="ai-ph">
+    <div class="ai-ph-info">
+      <div class="ai-ph-av">
+        <svg width="17" height="17" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
+      </div>
+      <div>
+        <div class="ai-ph-name">Galvor AI</div>
+        <div class="ai-ph-sub">Campaign Intelligence</div>
+      </div>
+    </div>
+    <button id="ai-x" onclick="toggleAI()">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div id="ai-msgs"></div>
+  <div id="ai-chips"></div>
+  <div id="ai-inp-row">
+    <input id="ai-inp" placeholder="Ask me to do anything…" onkeydown="if(event.key==='Enter')aiSend()">
+    <button id="ai-send" onclick="aiSend()">
+      <svg width="14" height="14" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
+    </button>
+  </div>
+</div>
+
 </body>
 </html>
