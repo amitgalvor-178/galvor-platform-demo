@@ -240,15 +240,18 @@ body { display:flex; background:var(--bg); color:var(--text); font-family:-apple
 #screen-brand-dna { background:var(--bg); }
 
 /* ── Galvor AI Chat Widget ── */
+#ai-fab-wrap {
+  box-shadow: 0 4px 24px rgba(196,135,12,0.45);
+  border-radius: 100px; transition: all 0.2s;
+}
+#ai-fab-wrap:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(196,135,12,0.6); }
 #ai-fab {
-  position: fixed; bottom: 28px; right: 28px; z-index: 9999;
   display: flex; align-items: center; gap: 9px;
   padding: 13px 22px; background: linear-gradient(135deg,#c4870c,#7c3300);
-  border: none; border-radius: 100px; color: #fff;
+  border: none; color: #fff;
   font-size: 13.5px; font-weight: 700; font-family: inherit; cursor: pointer;
-  box-shadow: 0 4px 24px rgba(196,135,12,0.45); transition: all 0.2s; letter-spacing: 0.01em;
+  letter-spacing: 0.01em;
 }
-#ai-fab:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(196,135,12,0.6); }
 .ai-fab-pulse {
   width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.9);
   animation: aiFabP 2s ease-in-out infinite;
@@ -5487,6 +5490,12 @@ goPanel(0);
 
 let _aiOpen = false, _aiInited = false;
 
+function dismissAI() {
+  _aiOpen = false;
+  document.getElementById('ai-panel').classList.remove('ai-open');
+  document.getElementById('ai-fab-wrap').style.display = 'none';
+}
+
 function toggleAI() {
   _aiOpen = !_aiOpen;
   document.getElementById('ai-panel').classList.toggle('ai-open', _aiOpen);
@@ -5685,13 +5694,16 @@ function aiSend(txt) {
 </script>
 
 <!-- ── Galvor AI Chat Widget ── -->
-<button id="ai-fab" onclick="toggleAI()">
-  <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
-  </svg>
-  Galvor AI
-  <div class="ai-fab-pulse"></div>
-</button>
+<div id="ai-fab-wrap" style="position:fixed;bottom:28px;right:28px;z-index:9999;display:flex;align-items:center;gap:0;">
+  <button id="ai-fab" onclick="toggleAI()" style="border-radius:100px 0 0 100px;padding-right:14px;">
+    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
+    </svg>
+    Galvor AI
+    <div class="ai-fab-pulse"></div>
+  </button>
+  <button id="ai-fab-dismiss" onclick="dismissAI()" title="Dismiss" style="height:100%;padding:0 10px 0 9px;border-radius:0 100px 100px 0;border:none;background:linear-gradient(135deg,#c4870c,#7c3300);color:rgba(255,255,255,0.75);cursor:pointer;font-size:14px;line-height:1;border-left:1px solid rgba(255,255,255,0.18);transition:color 0.15s;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,0.75)'">&#x2715;</button>
+</div>
 
 <div id="ai-panel">
   <div id="ai-ph">
