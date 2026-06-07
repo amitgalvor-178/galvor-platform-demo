@@ -1417,121 +1417,196 @@ body { display:flex; background:var(--bg); color:var(--text); font-family:-apple
           <div id="s2-counter" style="font-size:12px;font-weight:600;color:var(--text-3);">0 of 5 selected</div>
         </div>
 
-        <!-- Concept cards — horizontal scroll row of portrait tiles -->
-        <div style="display:flex;gap:14px;margin-bottom:18px;overflow-x:auto;padding-bottom:10px;">
+        <!-- Concept cards — list rows with performance on right -->
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:18px;">
 
           <!-- Card 1: Spot the Difference -->
-          <div class="concept-card cc-animate" id="cc-1" style="animation-delay:0.05s;flex-shrink:0;width:220px;" onclick="selectConcept(1)">
-            <div class="cc-top" style="background:#c4870c;"><img src="Images - Concept/Gemini_Generated_Image_5lzkgh5lzkgh5lzk.png" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div>
-            <div style="padding:18px 20px;">
-              <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">
-                <div style="display:flex;align-items:center;gap:8px;">
+          <div class="concept-card cc-animate" id="cc-1" style="animation-delay:0.00s;display:flex;flex-direction:row;width:100%;overflow:hidden;" onclick="selectConcept(1)">
+            <!-- Thumbnail -->
+            <div style="width:88px;flex-shrink:0;background:#c4870c;position:relative;overflow:hidden;">
+              <img src="Images - Concept/Gemini_Generated_Image_5lzkgh5lzkgh5lzk.png" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
+            </div>
+            <!-- Main content -->
+            <div style="flex:1;padding:14px 16px;display:flex;flex-direction:column;gap:0;min-width:0;">
+              <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:7px;">
                   <span style="font-size:10px;font-weight:900;color:rgba(196,135,12,0.35);">01</span>
                   <span class="chip chip-v" style="font-size:10px;">Comparison</span>
                 </div>
                 <div class="cc-check-badge" id="cc-check-1" style="display:none;">✓</div>
               </div>
-              <div style="font-size:15px;font-weight:800;color:var(--text);letter-spacing:-0.3px;margin-bottom:10px;">Spot the Difference</div>
-              <div style="font-size:12px;font-style:italic;color:var(--text-2);line-height:1.6;border-left:2.5px solid rgba(196,135,12,0.25);padding-left:10px;margin-bottom:12px;">"One of these shirts costs ₹8,000, the other ₹2,499. Can you guess which is which?"</div>
-              <div style="font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);margin-bottom:7px;">Shots</div>
-              <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px;">
+              <div style="font-size:14px;font-weight:800;color:var(--text);letter-spacing:-0.3px;margin-bottom:8px;">Spot the Difference</div>
+              <div style="font-size:11.5px;font-style:italic;color:var(--text-2);line-height:1.55;border-left:2.5px solid rgba(196,135,12,0.25);padding-left:9px;margin-bottom:10px;">"One of these shirts costs ₹8,000, the other ₹2,499. Can you guess which is which?"</div>
+              <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;">
                 <span class="cc-shot">Flat lay</span><span class="cc-shot">Macro texture</span><span class="cc-shot">Overhead</span><span class="cc-shot">Side drape</span><span class="cc-shot">Try-on</span>
               </div>
-              <div style="font-size:11px;color:var(--text-3);margin-bottom:14px;">Hooks on curiosity · Reveals value without bragging</div>
+              <div style="font-size:11px;color:var(--text-3);margin-bottom:12px;flex:1;">Hooks on curiosity · Reveals value without bragging</div>
               <button class="cc-select-btn" id="cc-btn-1" onclick="selectConcept(1);event.stopPropagation();">Add concept to Campaign</button>
             </div>
+            <!-- Performance panel (right) -->
+              <div style="width:152px;flex-shrink:0;border-left:1px solid var(--border);padding:16px 16px;display:flex;flex-direction:column;justify-content:center;gap:14px;background:#fafaf8;">
+                <div>
+                  <div style="font-size:8.5px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);font-weight:700;margin-bottom:4px;">Total Ad Spend</div>
+                  <div style="font-size:18px;font-weight:900;color:var(--text);letter-spacing:-0.5px;">₹45K</div>
+                </div>
+                <div>
+                  <div style="font-size:8.5px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);font-weight:700;margin-bottom:4px;">Avg Hook Rate</div>
+                  <div style="font-size:18px;font-weight:900;color:var(--cyan);letter-spacing:-0.5px;">61.2%</div>
+                </div>
+                <div>
+                  <div style="font-size:8.5px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);font-weight:700;margin-bottom:4px;">RoAS</div>
+                  <div style="font-size:18px;font-weight:900;letter-spacing:-0.5px;color:#16a34a">2.8x</div>
+                </div>
+              </div>
           </div>
-
           <!-- Card 2: Why Pay More? -->
-          <div class="concept-card cc-animate" id="cc-2" style="animation-delay:0.12s;flex-shrink:0;width:220px;" onclick="selectConcept(2)">
-            <div class="cc-top" style="background:#0891b2;"><img src="Images - Concept/Gemini_Generated_Image_w7evjcw7evjcw7ev.png" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div>
-            <div style="padding:18px 20px;">
-              <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">
-                <div style="display:flex;align-items:center;gap:8px;">
+          <div class="concept-card cc-animate" id="cc-2" style="animation-delay:0.07s;display:flex;flex-direction:row;width:100%;overflow:hidden;" onclick="selectConcept(2)">
+            <!-- Thumbnail -->
+            <div style="width:88px;flex-shrink:0;background:#0891b2;position:relative;overflow:hidden;">
+              <img src="Images - Concept/Gemini_Generated_Image_w7evjcw7evjcw7ev.png" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
+            </div>
+            <!-- Main content -->
+            <div style="flex:1;padding:14px 16px;display:flex;flex-direction:column;gap:0;min-width:0;">
+              <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:7px;">
                   <span style="font-size:10px;font-weight:900;color:rgba(8,145,178,0.35);">02</span>
                   <span class="chip chip-c" style="font-size:10px;">Educational</span>
                 </div>
                 <div class="cc-check-badge" id="cc-check-2" style="display:none;">✓</div>
               </div>
-              <div style="font-size:15px;font-weight:800;color:var(--text);letter-spacing:-0.3px;margin-bottom:10px;">Why Pay More?</div>
-              <div style="font-size:12px;font-style:italic;color:var(--text-2);line-height:1.6;border-left:2.5px solid rgba(8,145,178,0.3);padding-left:10px;margin-bottom:12px;">"Brands charge ₹4–5,000 extra for marketing and distribution. Maison X skips all that — same fabric, made right."</div>
-              <div style="font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);margin-bottom:7px;">Shots</div>
-              <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px;">
+              <div style="font-size:14px;font-weight:800;color:var(--text);letter-spacing:-0.3px;margin-bottom:8px;">Why Pay More?</div>
+              <div style="font-size:11.5px;font-style:italic;color:var(--text-2);line-height:1.55;border-left:2.5px solid rgba(8,145,178,0.3);padding-left:9px;margin-bottom:10px;">"Brands charge ₹4–5,000 extra for marketing and distribution. Maison X skips all that — same fabric, made right."</div>
+              <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;">
                 <span class="cc-shot">Unboxing</span><span class="cc-shot">Tag close-up</span><span class="cc-shot">Fabric fold</span><span class="cc-shot">Price overlay</span><span class="cc-shot">On body</span>
               </div>
-              <div style="font-size:11px;color:var(--text-3);margin-bottom:14px;">Educates skeptics · Positions MX as insider knowledge</div>
+              <div style="font-size:11px;color:var(--text-3);margin-bottom:12px;flex:1;">Educates skeptics · Positions MX as insider knowledge</div>
               <button class="cc-select-btn" id="cc-btn-2" onclick="selectConcept(2);event.stopPropagation();">Add concept to Campaign</button>
             </div>
+            <!-- Performance panel (right) -->
+              <div style="width:152px;flex-shrink:0;border-left:1px solid var(--border);padding:16px 16px;display:flex;flex-direction:column;justify-content:center;gap:14px;background:#fafaf8;">
+                <div>
+                  <div style="font-size:8.5px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);font-weight:700;margin-bottom:4px;">Total Ad Spend</div>
+                  <div style="font-size:18px;font-weight:900;color:var(--text);letter-spacing:-0.5px;">₹38K</div>
+                </div>
+                <div>
+                  <div style="font-size:8.5px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);font-weight:700;margin-bottom:4px;">Avg Hook Rate</div>
+                  <div style="font-size:18px;font-weight:900;color:var(--cyan);letter-spacing:-0.5px;">54.8%</div>
+                </div>
+                <div>
+                  <div style="font-size:8.5px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);font-weight:700;margin-bottom:4px;">RoAS</div>
+                  <div style="font-size:18px;font-weight:900;letter-spacing:-0.5px;color:#16a34a">2.3x</div>
+                </div>
+              </div>
           </div>
-
           <!-- Card 3: Blind Feel Test -->
-          <div class="concept-card cc-animate" id="cc-3" style="animation-delay:0.19s;flex-shrink:0;width:220px;" onclick="selectConcept(3)">
-            <div class="cc-top" style="background:#d97706;"><img src="Images - Concept/Gemini_Generated_Image_ukg9e3ukg9e3ukg9.png" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div>
-            <div style="padding:18px 20px;">
-              <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">
-                <div style="display:flex;align-items:center;gap:8px;">
+          <div class="concept-card cc-animate" id="cc-3" style="animation-delay:0.14s;display:flex;flex-direction:row;width:100%;overflow:hidden;" onclick="selectConcept(3)">
+            <!-- Thumbnail -->
+            <div style="width:88px;flex-shrink:0;background:#d97706;position:relative;overflow:hidden;">
+              <img src="Images - Concept/Gemini_Generated_Image_ukg9e3ukg9e3ukg9.png" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
+            </div>
+            <!-- Main content -->
+            <div style="flex:1;padding:14px 16px;display:flex;flex-direction:column;gap:0;min-width:0;">
+              <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:7px;">
                   <span style="font-size:10px;font-weight:900;color:rgba(217,119,6,0.35);">03</span>
                   <span class="chip chip-a" style="font-size:10px;">Tactile</span>
                 </div>
                 <div class="cc-check-badge" id="cc-check-3" style="display:none;">✓</div>
               </div>
-              <div style="font-size:15px;font-weight:800;color:var(--text);letter-spacing:-0.3px;margin-bottom:10px;">Blind Feel Test</div>
-              <div style="font-size:12px;font-style:italic;color:var(--text-2);line-height:1.6;border-left:2.5px solid rgba(217,119,6,0.3);padding-left:10px;margin-bottom:12px;">"One of these is a ₹9,000 luxury shirt, the other is Maison X… (touch both) This one's smoother. (Reveal) It's actually Maison X."</div>
-              <div style="font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);margin-bottom:7px;">Shots</div>
-              <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px;">
+              <div style="font-size:14px;font-weight:800;color:var(--text);letter-spacing:-0.3px;margin-bottom:8px;">Blind Feel Test</div>
+              <div style="font-size:11.5px;font-style:italic;color:var(--text-2);line-height:1.55;border-left:2.5px solid rgba(217,119,6,0.3);padding-left:9px;margin-bottom:10px;">"One of these is a ₹9,000 luxury shirt, the other is Maison X… (touch both) This one's smoother. (Reveal) It's actually Maison X."</div>
+              <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;">
                 <span class="cc-shot">Two shirts overhead</span><span class="cc-shot">Fingers on linen</span><span class="cc-shot">Reaction</span><span class="cc-shot">Side light</span><span class="cc-shot">Try-on</span>
               </div>
-              <div style="font-size:11px;color:var(--text-3);margin-bottom:14px;">Tactile proof that feels authentic, not scripted</div>
+              <div style="font-size:11px;color:var(--text-3);margin-bottom:12px;flex:1;">Tactile proof that feels authentic, not scripted</div>
               <button class="cc-select-btn" id="cc-btn-3" onclick="selectConcept(3);event.stopPropagation();">Add concept to Campaign</button>
             </div>
+            <!-- Performance panel (right) -->
+              <div style="width:152px;flex-shrink:0;border-left:1px solid var(--border);padding:16px 16px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:0;background:#fafaf8;">
+                <span style="font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;background:rgba(196,135,12,0.08);border:1px solid rgba(196,135,12,0.2);color:#c4870c;white-space:nowrap;">✦ New Concept</span>
+                <div style="font-size:10.5px;color:var(--text-3);margin-top:8px;line-height:1.5;">No past performance data available</div>
+              </div>
           </div>
-
           <!-- Card 4: The ₹1799 Secret -->
-          <div class="concept-card cc-animate" id="cc-4" style="animation-delay:0.26s;flex-shrink:0;width:220px;" onclick="selectConcept(4)">
-            <div class="cc-top" style="background:#059669;"><img src="Images - Concept/Gemini_Generated_Image_54cia454cia454ci.png" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div>
-            <div style="padding:18px 20px;">
-              <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">
-                <div style="display:flex;align-items:center;gap:8px;">
+          <div class="concept-card cc-animate" id="cc-4" style="animation-delay:0.21s;display:flex;flex-direction:row;width:100%;overflow:hidden;" onclick="selectConcept(4)">
+            <!-- Thumbnail -->
+            <div style="width:88px;flex-shrink:0;background:#059669;position:relative;overflow:hidden;">
+              <img src="Images - Concept/Gemini_Generated_Image_54cia454cia454ci.png" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
+            </div>
+            <!-- Main content -->
+            <div style="flex:1;padding:14px 16px;display:flex;flex-direction:column;gap:0;min-width:0;">
+              <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:7px;">
                   <span style="font-size:10px;font-weight:900;color:rgba(5,150,105,0.35);">04</span>
                   <span class="chip chip-g" style="font-size:10px;">Lifestyle Reveal</span>
                 </div>
                 <div class="cc-check-badge" id="cc-check-4" style="display:none;">✓</div>
               </div>
-              <div style="font-size:15px;font-weight:800;color:var(--text);letter-spacing:-0.3px;margin-bottom:10px;">The ₹1799 Secret</div>
-              <div style="font-size:12px;font-style:italic;color:var(--text-2);line-height:1.6;border-left:2.5px solid rgba(5,150,105,0.3);padding-left:10px;margin-bottom:12px;">"Looks like ₹8,000. Feels like ₹8,000. Costs ₹1799. Structured enough for work, soft enough for weekends."</div>
-              <div style="font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);margin-bottom:7px;">Shots</div>
-              <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px;">
+              <div style="font-size:14px;font-weight:800;color:var(--text);letter-spacing:-0.3px;margin-bottom:8px;">The ₹1799 Secret</div>
+              <div style="font-size:11.5px;font-style:italic;color:var(--text-2);line-height:1.55;border-left:2.5px solid rgba(5,150,105,0.3);padding-left:9px;margin-bottom:10px;">"Looks like ₹8,000. Feels like ₹8,000. Costs ₹1799. Structured enough for work, soft enough for weekends."</div>
+              <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;">
                 <span class="cc-shot">Styled flat lay</span><span class="cc-shot">Buttoning</span><span class="cc-shot">Outdoor breeze</span><span class="cc-shot">Macro sheen</span><span class="cc-shot">Walking shot</span>
               </div>
-              <div style="font-size:11px;color:var(--text-3);margin-bottom:14px;">One line sells it · Aspirational lifestyle format</div>
+              <div style="font-size:11px;color:var(--text-3);margin-bottom:12px;flex:1;">One line sells it · Aspirational lifestyle format</div>
               <button class="cc-select-btn" id="cc-btn-4" onclick="selectConcept(4);event.stopPropagation();">Add concept to Campaign</button>
             </div>
+            <!-- Performance panel (right) -->
+              <div style="width:152px;flex-shrink:0;border-left:1px solid var(--border);padding:16px 16px;display:flex;flex-direction:column;justify-content:center;gap:14px;background:#fafaf8;">
+                <div>
+                  <div style="font-size:8.5px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);font-weight:700;margin-bottom:4px;">Total Ad Spend</div>
+                  <div style="font-size:18px;font-weight:900;color:var(--text);letter-spacing:-0.5px;">₹72K</div>
+                </div>
+                <div>
+                  <div style="font-size:8.5px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);font-weight:700;margin-bottom:4px;">Avg Hook Rate</div>
+                  <div style="font-size:18px;font-weight:900;color:var(--cyan);letter-spacing:-0.5px;">63.4%</div>
+                </div>
+                <div>
+                  <div style="font-size:8.5px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);font-weight:700;margin-bottom:4px;">RoAS</div>
+                  <div style="font-size:18px;font-weight:900;letter-spacing:-0.5px;color:#16a34a">3.1x</div>
+                </div>
+              </div>
           </div>
-
           <!-- Card 5: Too Good to Be True? -->
-          <div class="concept-card cc-animate" id="cc-5" style="animation-delay:0.33s;flex-shrink:0;width:220px;" onclick="selectConcept(5)">
-            <div class="cc-top" style="background:#c4870c;"><img src="Images - Concept/Gemini_Generated_Image_xnm7unxnm7unxnm7.png" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;"></div>
-            <div style="padding:18px 20px;">
-              <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">
-                <div style="display:flex;align-items:center;gap:8px;">
+          <div class="concept-card cc-animate" id="cc-5" style="animation-delay:0.28s;display:flex;flex-direction:row;width:100%;overflow:hidden;" onclick="selectConcept(5)">
+            <!-- Thumbnail -->
+            <div style="width:88px;flex-shrink:0;background:#c4870c;position:relative;overflow:hidden;">
+              <img src="Images - Concept/Gemini_Generated_Image_xnm7unxnm7unxnm7.png" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
+            </div>
+            <!-- Main content -->
+            <div style="flex:1;padding:14px 16px;display:flex;flex-direction:column;gap:0;min-width:0;">
+              <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:7px;">
                   <span style="font-size:10px;font-weight:900;color:rgba(196,135,12,0.35);">05</span>
                   <span style="display:inline-flex;align-items:center;padding:3px 10px;border-radius:100px;font-size:10px;font-weight:600;background:rgba(196,135,12,0.08);border:1px solid rgba(196,135,12,0.18);color:#c4870c;">Discovery Story</span>
                 </div>
                 <div class="cc-check-badge" id="cc-check-5" style="display:none;background:#c4870c;">✓</div>
               </div>
-              <div style="font-size:15px;font-weight:800;color:var(--text);letter-spacing:-0.3px;margin-bottom:10px;">Too Good to Be True?</div>
-              <div style="font-size:12px;font-style:italic;color:var(--text-2);line-height:1.6;border-left:2.5px solid rgba(196,135,12,0.25);padding-left:10px;margin-bottom:12px;">"Linen is everywhere — but most is thin, scratchy. Then I came across Maison X… I knew this was different."</div>
-              <div style="font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);margin-bottom:7px;">Shots</div>
-              <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px;">
+              <div style="font-size:14px;font-weight:800;color:var(--text);letter-spacing:-0.3px;margin-bottom:8px;">Too Good to Be True?</div>
+              <div style="font-size:11.5px;font-style:italic;color:var(--text-2);line-height:1.55;border-left:2.5px solid rgba(196,135,12,0.25);padding-left:9px;margin-bottom:10px;">"Linen is everywhere — but most is thin, scratchy. Then I came across Maison X… I knew this was different."</div>
+              <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;">
                 <span class="cc-shot">Opening selfie</span><span class="cc-shot">Unboxing</span><span class="cc-shot">Try-on daylight</span><span class="cc-shot">Smile outro</span>
               </div>
-              <div style="font-size:11px;color:var(--text-3);margin-bottom:14px;">Skeptic-to-believer arc · High trust format</div>
+              <div style="font-size:11px;color:var(--text-3);margin-bottom:12px;flex:1;">Skeptic-to-believer arc · High trust format</div>
               <button class="cc-select-btn" id="cc-btn-5" onclick="selectConcept(5);event.stopPropagation();">Add concept to Campaign</button>
             </div>
+            <!-- Performance panel (right) -->
+              <div style="width:152px;flex-shrink:0;border-left:1px solid var(--border);padding:16px 16px;display:flex;flex-direction:column;justify-content:center;gap:14px;background:#fafaf8;">
+                <div>
+                  <div style="font-size:8.5px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);font-weight:700;margin-bottom:4px;">Total Ad Spend</div>
+                  <div style="font-size:18px;font-weight:900;color:var(--text);letter-spacing:-0.5px;">₹1.18L</div>
+                </div>
+                <div>
+                  <div style="font-size:8.5px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);font-weight:700;margin-bottom:4px;">Avg Hook Rate</div>
+                  <div style="font-size:18px;font-weight:900;color:var(--cyan);letter-spacing:-0.5px;">68.5%</div>
+                </div>
+                <div>
+                  <div style="font-size:8.5px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);font-weight:700;margin-bottom:4px;">RoAS</div>
+                  <div style="font-size:18px;font-weight:900;letter-spacing:-0.5px;color:#16a34a">3.8x</div>
+                </div>
+              </div>
           </div>
 
         </div>
-
         <!-- Bottom CTA -->
         <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 0 4px;">
           <div style="font-size:12px;color:var(--text-3);">Select at least 1 concept to proceed</div>
@@ -4657,21 +4732,21 @@ function selectConcept(n) {
 /* ── Excel Tracker ── */
 function openExcelTracker() {
   const creators = [
-    {name:'Divij',campaign:'Office Going',followers:'25K',status:'Commercials Received',deliverables:'1 Collab Reel + 3mo Ad Rights',views:'40,000',er:'3.3%',hook:'52.0%',aud:'49.2%',comm1:'₹25,000',comm2:'—',brandStatus:'Rejected',comments:'Aesthetics not matching, GenZ'},
-    {name:'Divyum',campaign:'Office Going',followers:'11.7K',status:'Commercials Received',deliverables:'1 Collab Reel',views:'15,000',er:'6.6%',hook:'49.0%',aud:'60.8%',comm1:'₹32,000',comm2:'₹26,000 + ₹6K/mo ad rights',brandStatus:'Rejected',comments:'Aesthetics not matching, GenZ'},
-    {name:'Amit',campaign:'Office Going',followers:'20.4K',status:'Commercials Received',deliverables:'1 Collab Reel + 3mo Ad Rights',views:'10,000',er:'3.7%',hook:'57.2%',aud:'57.1%',comm1:'₹17,000',comm2:'—',brandStatus:'Rejected',comments:'Aesthetics not matching, GenZ'},
-    {name:'Vikrant',campaign:'Office Going',followers:'33.1K',status:'Commercials Received',deliverables:'1 Collab Reel + 3mo Ad Rights',views:'50,000',er:'—',hook:'—',aud:'—',comm1:'₹28,500',comm2:'—',brandStatus:'Rejected',comments:'Aesthetics not matching, GenZ'},
-    {name:'Roshan',campaign:"Father's Day",followers:'406K',status:'Commercials Received',deliverables:'Collab Reel',views:'1,00,000',er:'3.2%',hook:'76.8%',aud:'38.9%',comm1:'₹55,000',comm2:'—',brandStatus:'Rejected',comments:'No'},
-    {name:'Stayathomedad',campaign:"Father's Day",followers:'21K',status:'Commercials Received',deliverables:'Collab Reel',views:'14,000',er:'6.0%',hook:'56.5%',aud:'53.3%',comm1:'₹8,500',comm2:'₹9,500 (30d) / ₹11,000 (3mo)',brandStatus:'Rejected',comments:'Not ideal match for MaisonX'},
-    {name:'Lakshay',campaign:"Father's Day",followers:'19K',status:'Commercials Received',deliverables:'Collab Reel',views:'25,000',er:'3.9%',hook:'58.4%',aud:'57.2%',comm1:'₹30,000',comm2:'—',brandStatus:'Rejected',comments:'No'},
-    {name:'Karan',campaign:"Father's Day",followers:'342K',status:'Commercials Received',deliverables:'Collab Reel',views:'90,000',er:'5.7%',hook:'42.1%',aud:'47.7%',comm1:'₹80,000',comm2:'—',brandStatus:'Rejected',comments:'No'},
-    {name:'Minal',campaign:'TGLH',followers:'1.1K',status:'Reached Out',deliverables:'1 Collab Reel',views:'4,000',er:'—',hook:'—',aud:'—',comm1:'₹3,000',comm2:'—',brandStatus:'Confirmed',comments:'High engaged audience'},
-    {name:'Pratham',campaign:'TGLH',followers:'4.6K',status:'Commercials Received',deliverables:'1 Collab Reel',views:'10,000',er:'—',hook:'—',aud:'—',comm1:'₹6,000',comm2:'—',brandStatus:'Rejected',comments:'No VO Content'},
-    {name:'Manish',campaign:'TGLH',followers:'1.6K',status:'Commercials Received',deliverables:'1 Collab Reel',views:'—',er:'—',hook:'—',aud:'—',comm1:'₹5,000',comm2:'—',brandStatus:'Confirmed',comments:'—'},
-    {name:'Daksh',campaign:'TGLH',followers:'1.7K',status:'Commercials Received',deliverables:'1 Collab Reel',views:'—',er:'—',hook:'—',aud:'—',comm1:'₹4,000',comm2:'—',brandStatus:'Awaiting Brand Confirmation',comments:'—'},
-    {name:'Shivani',campaign:'Mothers',followers:'9.8K',status:'Commercials Received',deliverables:'1 Collab Reel',views:'—',er:'6.5%',hook:'56.2%',aud:'71.8%',comm1:'₹15,000',comm2:'—',brandStatus:'Awaiting Brand Confirmation',comments:'—'},
-    {name:'Rajvi',campaign:'TGLH',followers:'7.2K',status:'Commercials Received',deliverables:'1 Collab Reel',views:'—',er:'3.2%',hook:'44.2%',aud:'58.7%',comm1:'₹5,000',comm2:'—',brandStatus:'Awaiting Brand Confirmation',comments:'—'},
-    {name:'Tejasvika Sarin',campaign:'TGLH',followers:'8.4K',status:'Commercials Received',deliverables:'1 Collab Reel',views:'—',er:'—',hook:'—',aud:'—',comm1:'₹10,000',comm2:'—',brandStatus:'—',comments:'—'},
+    {name:'Divij',campaign:'Office Going',followers:'25K',status:'Commercials Received',deliverables:'1 Collab Reel + 3mo Ad Rights',views:'40,000',er:'3.3%',hook:'52.0%',aud:'49.2%',comm1:'₹25,000',comm2:'—',brandStatus:'Rejected',comments:'Aesthetics not matching, GenZ',spend:'₹25,000',avgHook:'52.0%',roas:'1.4x'},
+    {name:'Divyum',campaign:'Office Going',followers:'11.7K',status:'Commercials Received',deliverables:'1 Collab Reel',views:'15,000',er:'6.6%',hook:'49.0%',aud:'60.8%',comm1:'₹32,000',comm2:'₹26,000 + ₹6K/mo ad rights',brandStatus:'Rejected',comments:'Aesthetics not matching, GenZ',spend:'₹32,000',avgHook:'49.0%',roas:'1.2x'},
+    {name:'Amit',campaign:'Office Going',followers:'20.4K',status:'Commercials Received',deliverables:'1 Collab Reel + 3mo Ad Rights',views:'10,000',er:'3.7%',hook:'57.2%',aud:'57.1%',comm1:'₹17,000',comm2:'—',brandStatus:'Rejected',comments:'Aesthetics not matching, GenZ',spend:'₹17,000',avgHook:'57.2%',roas:'1.6x'},
+    {name:'Vikrant',campaign:'Office Going',followers:'33.1K',status:'Commercials Received',deliverables:'1 Collab Reel + 3mo Ad Rights',views:'50,000',er:'—',hook:'—',aud:'—',comm1:'₹28,500',comm2:'—',brandStatus:'Rejected',comments:'Aesthetics not matching, GenZ',spend:'—',avgHook:'—',roas:'—'},
+    {name:'Roshan',campaign:"Father's Day",followers:'406K',status:'Commercials Received',deliverables:'Collab Reel',views:'1,00,000',er:'3.2%',hook:'76.8%',aud:'38.9%',comm1:'₹55,000',comm2:'—',brandStatus:'Rejected',comments:'No',spend:'₹55,000',avgHook:'76.8%',roas:'2.1x'},
+    {name:'Stayathomedad',campaign:"Father's Day",followers:'21K',status:'Commercials Received',deliverables:'Collab Reel',views:'14,000',er:'6.0%',hook:'56.5%',aud:'53.3%',comm1:'₹8,500',comm2:'₹9,500 (30d) / ₹11,000 (3mo)',brandStatus:'Rejected',comments:'Not ideal match for MaisonX',spend:'₹9,500',avgHook:'56.5%',roas:'1.8x'},
+    {name:'Lakshay',campaign:"Father's Day",followers:'19K',status:'Commercials Received',deliverables:'Collab Reel',views:'25,000',er:'3.9%',hook:'58.4%',aud:'57.2%',comm1:'₹30,000',comm2:'—',brandStatus:'Rejected',comments:'No',spend:'₹30,000',avgHook:'58.4%',roas:'2.4x'},
+    {name:'Karan',campaign:"Father's Day",followers:'342K',status:'Commercials Received',deliverables:'Collab Reel',views:'90,000',er:'5.7%',hook:'42.1%',aud:'47.7%',comm1:'₹80,000',comm2:'—',brandStatus:'Rejected',comments:'No',spend:'₹80,000',avgHook:'42.1%',roas:'1.3x'},
+    {name:'Minal',campaign:'TGLH',followers:'1.1K',status:'Reached Out',deliverables:'1 Collab Reel',views:'4,000',er:'—',hook:'—',aud:'—',comm1:'₹3,000',comm2:'—',brandStatus:'Confirmed',comments:'High engaged audience',spend:'₹3,000',avgHook:'—',roas:'—'},
+    {name:'Pratham',campaign:'TGLH',followers:'4.6K',status:'Commercials Received',deliverables:'1 Collab Reel',views:'10,000',er:'—',hook:'—',aud:'—',comm1:'₹6,000',comm2:'—',brandStatus:'Rejected',comments:'No VO Content',spend:'—',avgHook:'—',roas:'—'},
+    {name:'Manish',campaign:'TGLH',followers:'1.6K',status:'Commercials Received',deliverables:'1 Collab Reel',views:'—',er:'—',hook:'—',aud:'—',comm1:'₹5,000',comm2:'—',brandStatus:'Confirmed',comments:'—',spend:'₹5,000',avgHook:'—',roas:'—'},
+    {name:'Daksh',campaign:'TGLH',followers:'1.7K',status:'Commercials Received',deliverables:'1 Collab Reel',views:'—',er:'—',hook:'—',aud:'—',comm1:'₹4,000',comm2:'—',brandStatus:'Awaiting Brand Confirmation',comments:'—',spend:'—',avgHook:'—',roas:'—'},
+    {name:'Shivani',campaign:'Mothers',followers:'9.8K',status:'Commercials Received',deliverables:'1 Collab Reel',views:'—',er:'6.5%',hook:'56.2%',aud:'71.8%',comm1:'₹15,000',comm2:'—',brandStatus:'Awaiting Brand Confirmation',comments:'—',spend:'—',avgHook:'56.2%',roas:'—'},
+    {name:'Rajvi',campaign:'TGLH',followers:'7.2K',status:'Commercials Received',deliverables:'1 Collab Reel',views:'—',er:'3.2%',hook:'44.2%',aud:'58.7%',comm1:'₹5,000',comm2:'—',brandStatus:'Awaiting Brand Confirmation',comments:'—',spend:'—',avgHook:'44.2%',roas:'—'},
+    {name:'Tejasvika Sarin',campaign:'TGLH',followers:'8.4K',status:'Commercials Received',deliverables:'1 Collab Reel',views:'—',er:'—',hook:'—',aud:'—',comm1:'₹10,000',comm2:'—',brandStatus:'—',comments:'—',spend:'—',avgHook:'—',roas:'—'},
   ];
   const statusColor = s => {
     if(s==='Confirmed') return {bg:'#dcfce7',color:'#15803d',border:'#86efac'};
@@ -4679,8 +4754,14 @@ function openExcelTracker() {
     if(s.includes('Awaiting')) return {bg:'#fef9c3',color:'#92400e',border:'#fde68a'};
     return {bg:'#f1f5f9',color:'#475569',border:'#cbd5e1'};
   };
+  const roasColor = r => {
+    if(r==='—') return '#94a3b8';
+    const v = parseFloat(r);
+    if(v>=2.5) return '#15803d'; if(v>=1.5) return '#c4870c'; return '#b91c1c';
+  };
   const rows = creators.map((c,i)=>{
     const sc = statusColor(c.brandStatus);
+    const rc = roasColor(c.roas);
     return `<tr style="background:${i%2===0?'#fff':'#f8fafb'};">
       <td style="color:#64748b;font-size:11px;padding:0 10px;border-right:1px solid #e2e8f0;">${i+2}</td>
       <td style="font-weight:600;">${c.name}</td>
@@ -4695,6 +4776,9 @@ function openExcelTracker() {
       <td style="text-align:right;font-weight:600;">${c.comm1}</td>
       <td style="text-align:right;color:#64748b;">${c.comm2}</td>
       <td><span style="padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:${sc.bg};color:${sc.color};border:1px solid ${sc.border};">${c.brandStatus}</span></td>
+      <td style="text-align:right;font-weight:600;color:#0f172a;">${c.spend}</td>
+      <td style="text-align:right;font-weight:600;color:#0891b2;">${c.avgHook}</td>
+      <td style="text-align:right;font-weight:700;color:${rc};">${c.roas}</td>
       <td style="color:#64748b;">${c.comments}</td>
     </tr>`;
   }).join('');
@@ -4708,10 +4792,12 @@ function openExcelTracker() {
     .tab{padding:8px 18px;font-size:12px;font-weight:600;color:#64748b;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;}
     .tab.active{color:#107C41;border-bottom-color:#107C41;background:#fff;}
     .sheet-wrap{overflow:auto;max-height:calc(100vh - 90px);}
-    table{border-collapse:collapse;width:100%;min-width:1400px;}
+    table{border-collapse:collapse;width:100%;min-width:1600px;}
     thead tr{background:#107C41;color:#fff;position:sticky;top:0;z-index:10;}
     thead td{padding:9px 12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap;border-right:1px solid rgba(255,255,255,0.15);}
+    thead td.perf-col{background:#0d6e38;border-left:2px solid rgba(255,255,255,0.3);}
     tbody td{padding:8px 12px;border-bottom:1px solid #e2e8f0;border-right:1px solid #e2e8f0;white-space:nowrap;}
+    tbody td.perf-col{background:rgba(16,124,65,0.03);border-left:2px solid #e2e8f0;}
     .row-num{background:#f1f5f9;border-right:1px solid #e2e8f0;width:36px;text-align:center;}
     thead .row-num{background:#0d6e38;}
   </style>
@@ -4736,13 +4822,17 @@ function openExcelTracker() {
       <td style="text-align:right;">Avg. Views</td><td style="text-align:right;">ER %</td>
       <td style="text-align:right;">Hook Rate</td><td style="text-align:right;">Audience 25–34</td>
       <td style="text-align:right;">Commercial 1</td><td style="text-align:right;">Commercial 2</td>
-      <td>Brand Status</td><td>Comments</td>
+      <td>Brand Status</td>
+      <td class="perf-col" style="text-align:right;">Total Ad Spend</td>
+      <td class="perf-col" style="text-align:right;">Avg Hook Rate</td>
+      <td class="perf-col" style="text-align:right;">RoAS</td>
+      <td>Comments</td>
     </tr></thead>
     <tbody>${rows}</tbody>
   </table>
   </div>
   </body></html>`;
-  const w = window.open('','_blank','width=1400,height=700');
+  const w = window.open('','_blank','width=1500,height=700');
   w.document.open(); w.document.write(html); w.document.close();
 }
 
