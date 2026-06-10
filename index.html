@@ -5101,7 +5101,77 @@ window.cfStep1OK = async function() {
   cfClearActions();
   cfAddUser('Looks good — generate concepts');
   cfStep = 2; cfSetHeader(2);
-  await cfAddAI('On it. Analysing MaisonX\'s brand DNA — tone, palette, product story — and generating creative concepts for Reels.<br><br><span class="dm">Scanning 847 top-performing ad formats in premium fashion…</span>', 1200);
+  await cfAddAI('On it — analysing MaisonX\'s brand DNA and scanning the creative landscape.', 700);
+
+  // Animated concept generation processing card
+  const cgProc = document.createElement('div');
+  cgProc.className = 'cf-proc-row';
+  const cgSteps = [
+    { id:'cg1', icon:'🔍', label:'Scanning recent competition creatives' },
+    { id:'cg2', icon:'📈', label:'Scanning industry trending creatives'  },
+    { id:'cg3', icon:'🎬', label:'Scanning past MaisonX creatives'       },
+    { id:'cg4', icon:'⭐', label:'Scanning top creator creatives'        },
+    { id:'cg5', icon:'💡', label:'Generating concepts'                   },
+    { id:'cg6', icon:'🖼️', label:'Generating illustrative images'        },
+    { id:'cg7', icon:'📚', label:'Adding examples &amp; references'      },
+    { id:'cg8', icon:'📊', label:'Scoring on predicted RoAS'             },
+  ];
+  const cgRows = cgSteps.map((s,i) =>
+    `<div class="cf-proc-s"><span class="cf-proc-ic" id="${s.id}i">${i === 0 ? '⏳' : '·'}</span><span class="cf-proc-tx${i === 0 ? ' act' : ''}" id="${s.id}t">${s.label}</span></div>`
+  ).join('');
+
+  // Counter for creatives scanned
+  let _cgCount = 0;
+  const _cgTarget = 847;
+
+  cgProc.innerHTML = `<div class="cf-proc">
+    <div class="cf-ct" id="cg-title">Scanning Creative Library</div>
+    <div style="font-size:11px;color:var(--text-3);margin-bottom:8px;">
+      <span id="cg-counter" style="font-weight:700;color:var(--accent);">0</span> creatives analysed
+    </div>
+    ${cgRows}
+    <div class="cf-procbar" style="margin-top:10px;"><div class="cf-procfill" id="cgf" style="width:0%"></div></div>
+  </div>`;
+  cfChat().appendChild(cgProc); cfScroll();
+
+  // Count-up animation running in parallel
+  const cgCountUp = setInterval(() => {
+    _cgCount = Math.min(_cgCount + Math.floor(Math.random() * 28 + 8), _cgTarget);
+    const el = document.getElementById('cg-counter');
+    if (el) el.textContent = _cgCount.toLocaleString();
+    if (_cgCount >= _cgTarget) clearInterval(cgCountUp);
+  }, 80);
+
+  const cgTick = ms => new Promise(r => setTimeout(r, ms));
+  const cgAdv = async (doneId, pct) => {
+    const el = document.getElementById(doneId + 'i');
+    const tx = document.getElementById(doneId + 't');
+    if (el) el.textContent = '✅';
+    if (tx) tx.className = 'cf-proc-tx done';
+    const fill = document.getElementById('cgf');
+    if (fill) fill.style.width = pct + '%';
+    // activate next step
+    const nextN = parseInt(doneId.replace('cg','')) + 1;
+    const ni = 'cg' + nextN + 'i', nt = 'cg' + nextN + 't';
+    if (document.getElementById(ni)) {
+      document.getElementById(ni).textContent = '⏳';
+      document.getElementById(nt).className = 'cf-proc-tx act';
+    }
+  };
+
+  const delays = [700, 750, 700, 750, 900, 1100, 700, 800];
+  const pcts   = [12,   24,  36,  49,  64,  78,   89, 100];
+  for (let i = 0; i < cgSteps.length; i++) {
+    await cgTick(delays[i]);
+    await cgAdv(cgSteps[i].id, pcts[i]);
+  }
+  clearInterval(cgCountUp);
+  const counterEl = document.getElementById('cg-counter');
+  if (counterEl) counterEl.textContent = '847';
+  const titleEl = document.getElementById('cg-title');
+  if (titleEl) titleEl.textContent = '5 concepts ready';
+  await cgTick(800);
+  cgProc.remove();
 
   const concepts = [
     { id:'cc1', n:'01', type:'Comparison',      color:'#c4870c', img:'Images - Concept/Gemini_Generated_Image_5lzkgh5lzkgh5lzk.png',
