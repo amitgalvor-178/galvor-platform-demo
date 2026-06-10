@@ -5874,7 +5874,43 @@ window.cfConfirmAndGenerateBrief = async function() {
   const bc = cfBriefContent[crId] || cfBriefContent.cr1;
   cfAddUser('Yes, generate brief');
   cfStep = 4; cfSetHeader(4);
-  await cfAddAI('On it — generating a personalised brief for <span class="em">' + cr.name + '</span> tailored to their style and brand tone.', 900);
+  await cfAddAI('Generating a personalised brief for <span class="em">' + cr.name + '</span>…', 600);
+
+  // Animated brief-gen processing card
+  const bgenProc = document.createElement('div');
+  bgenProc.className = 'cf-proc-row';
+  bgenProc.innerHTML = `<div class="cf-proc">
+    <div class="cf-ct">Building Brief · ${cr.name}</div>
+    <div class="cf-proc-s"><span class="cf-proc-ic" id="bg1i">⏳</span><span class="cf-proc-tx act" id="bg1t">Reading detailed creator fitment…</span></div>
+    <div class="cf-proc-s"><span class="cf-proc-ic" id="bg2i">·</span><span class="cf-proc-tx" id="bg2t">Tweaking concept to fit creator style</span></div>
+    <div class="cf-proc-s"><span class="cf-proc-ic" id="bg3i">·</span><span class="cf-proc-tx" id="bg3t">Generating scene-by-scene script</span></div>
+    <div class="cf-proc-s"><span class="cf-proc-ic" id="bg4i">·</span><span class="cf-proc-tx" id="bg4t">Crafting opening hook &amp; CTA</span></div>
+    <div class="cf-proc-s"><span class="cf-proc-ic" id="bg5i">·</span><span class="cf-proc-tx" id="bg5t">Aligning tone to audience persona</span></div>
+    <div class="cf-proc-s"><span class="cf-proc-ic" id="bg6i">·</span><span class="cf-proc-tx" id="bg6t">Adding direction &amp; compliance notes</span></div>
+    <div class="cf-procbar"><div class="cf-procfill" id="bgf" style="width:8%"></div></div>
+  </div>`;
+  cfChat().appendChild(bgenProc); cfScroll();
+
+  const bgTick = ms => new Promise(r => setTimeout(r, ms));
+  const bgStep = async (ni, nt, pct) => {
+    document.getElementById(ni).textContent = '✅';
+    document.getElementById(nt).className = 'cf-proc-tx done';
+    document.getElementById('bgf').style.width = pct + '%';
+    // activate next
+    const nextNum = parseInt(ni.replace('bg','').replace('i','')) + 1;
+    const nxi = 'bg' + nextNum + 'i', nxt = 'bg' + nextNum + 't';
+    if (document.getElementById(nxi)) {
+      document.getElementById(nxi).textContent = '⏳';
+      document.getElementById(nxt).className = 'cf-proc-tx act';
+    }
+  };
+  await bgTick(700);  await bgStep('bg1i','bg1t', 25);
+  await bgTick(650);  await bgStep('bg2i','bg2t', 42);
+  await bgTick(700);  await bgStep('bg3i','bg3t', 58);
+  await bgTick(600);  await bgStep('bg4i','bg4t', 72);
+  await bgTick(650);  await bgStep('bg5i','bg5t', 86);
+  await bgTick(600);  await bgStep('bg6i','bg6t', 100);
+  await bgTick(400);  bgenProc.remove();
 
   const briefWrap = document.createElement('div');
   briefWrap.className = 'cf-brief-row';
