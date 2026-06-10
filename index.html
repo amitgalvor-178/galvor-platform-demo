@@ -420,8 +420,11 @@ body { display:flex; background:var(--bg); color:var(--text); font-family:-apple
 .cf-tag.g { background:rgba(5,150,105,0.07); border-color:rgba(5,150,105,0.2); color:var(--green); }
 .cf-tag.r { background:rgba(220,38,38,0.06); border-color:rgba(220,38,38,0.15); color:var(--red); }
 .cf-cc-row { padding:4px 0 4px 38px; animation:cfUp 0.35s ease; }
-.cf-cc-grid { display:flex; flex-direction:row; gap:12px; overflow-x:auto; padding-bottom:8px; }
-.cf-cc { background:#fff; border:1.5px solid var(--border); border-radius:12px; overflow:hidden; cursor:pointer; transition:all 0.2s; flex:0 0 215px; display:flex; flex-direction:column; }
+.cf-cc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.cf-cc-more-row { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:12px; }
+.cf-cc-more-btn { display:flex; align-items:center; justify-content:center; gap:6px; padding:9px 0; border-radius:9px; border:1.5px dashed var(--border); background:#fff; font-size:12px; font-weight:700; color:var(--text-3); cursor:pointer; transition:all 0.2s; margin-top:12px; }
+.cf-cc-more-btn:hover { border-color:rgba(196,135,12,0.4); color:var(--accent); background:rgba(196,135,12,0.03); }
+.cf-cc { background:#fff; border:1.5px solid var(--border); border-radius:12px; overflow:hidden; cursor:pointer; transition:all 0.2s; display:flex; flex-direction:column; }
 .cf-cc:hover { border-color:rgba(196,135,12,0.35); box-shadow:0 4px 16px rgba(0,0,0,0.09); transform:translateY(-2px); }
 .cf-cc.sel { border-color:var(--accent); box-shadow:0 0 0 3px rgba(196,135,12,0.12); }
 .cf-cc-img { position:relative; flex-shrink:0; }
@@ -5141,17 +5144,12 @@ window.cfStep1OK = async function() {
   // Sort by roas descending
   concepts.sort((a, b) => b.roas - a.roas);
 
-  const wrap = document.createElement('div');
-  wrap.className = 'cf-cc-row';
-  const grid = document.createElement('div');
-  grid.className = 'cf-cc-grid';
-  concepts.forEach(c => {
+  function cfMakeConceptCard(c) {
     const card = document.createElement('div');
     card.className = 'cf-cc'; card.id = 'card-'+c.id;
     card.onclick = () => cfToggleConcept(c.id, card);
     const chipBg = c.color + '14'; const chipClr = c.color;
     const scoreColor = c.roas >= 80 ? '#059669' : c.roas >= 65 ? '#d97706' : '#dc2626';
-    const scoreBg = c.roas >= 80 ? 'rgba(5,150,105,0.1)' : c.roas >= 65 ? 'rgba(217,119,6,0.1)' : 'rgba(220,38,38,0.1)';
     const scoreLabel = c.roas >= 80 ? '● High' : c.roas >= 65 ? '● Medium' : '● Low';
     card.innerHTML = `
       <div class="cf-cc-img" style="background:${c.color};">
@@ -5189,12 +5187,38 @@ window.cfStep1OK = async function() {
           </div>`).join('')}
         </div>
       </div>`;
-    grid.appendChild(card);
-  });
+    return card;
+  }
+
+  const top3 = concepts.slice(0, 3);
+  const rest2 = concepts.slice(3);
+
+  const wrap = document.createElement('div');
+  wrap.className = 'cf-cc-row';
+
+  const grid = document.createElement('div');
+  grid.className = 'cf-cc-grid';
+  top3.forEach(c => grid.appendChild(cfMakeConceptCard(c)));
   wrap.appendChild(grid);
+
+  // "+2 more" button
+  const moreBtn = document.createElement('div');
+  moreBtn.className = 'cf-cc-more-btn';
+  moreBtn.id = 'cf-cc-more-btn';
+  moreBtn.innerHTML = `<span style="font-size:14px;">＋</span> 2 more concepts`;
+  moreBtn.onclick = () => {
+    moreBtn.style.display = 'none';
+    const moreGrid = document.createElement('div');
+    moreGrid.className = 'cf-cc-more-row';
+    rest2.forEach(c => moreGrid.appendChild(cfMakeConceptCard(c)));
+    moreGrid.style.animation = 'cfUp 0.35s ease';
+    wrap.appendChild(moreGrid);
+  };
+  wrap.appendChild(moreBtn);
+
   await cfEl(wrap, 400);
 
-  await cfAddAI('5 concepts generated. <span class="em">Select at least 1</span> to assign to creators — pick multiple to test different angles.');
+  await cfAddAI('Top 3 concepts by predicted RoAS. <span class="em">Select at least 1</span> to assign to creators — or expand to see all 5.');
   const acts = cfMakeActions([{label:'Confirm selection →', cls:'pri', fn:'cfStep2OK', id:'cfbtn2'}]);
   acts.querySelector('#cfbtn2').disabled = true;
   cfBzSet(acts, true);
@@ -5880,7 +5904,7 @@ window.cfConfirmAndGenerateBrief = async function() {
     `<div class="cf-brief-del">${d}</div>`
   ).join('');
 
-  briefWrap.innerHTML = `<div class="cf-brief" style="max-width:960px;">
+  briefWrap.innerHTML = `<div class="cf-brief" style="max-width:1100px;">
     <div class="cf-brief-hd">
       <div>
         <div class="cf-brief-for">Creator Brief</div>
@@ -5889,7 +5913,7 @@ window.cfConfirmAndGenerateBrief = async function() {
       </div>
       <div class="cf-brief-aib">AI Generated</div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 260px;gap:0;align-items:start;">
+    <div style="display:grid;grid-template-columns:1fr 220px;gap:0;align-items:start;">
       <div class="cf-brief-bd" style="border-right:1px solid var(--border);">
 
         <div style="padding-bottom:4px;">
@@ -5931,16 +5955,19 @@ window.cfConfirmAndGenerateBrief = async function() {
 
       </div>
 
-      <!-- Video panel -->
+      <!-- Video panel — 9:16 -->
       <div style="padding:14px;display:flex;flex-direction:column;gap:10px;position:sticky;top:0;">
         <div style="font-size:9px;font-weight:700;letter-spacing:0.12em;color:var(--text-3);text-transform:uppercase;margin-bottom:2px;">Campaign Overview Video</div>
-        <video
-          src="campaign-overview.mp4"
-          controls
-          playsinline
-          style="width:100%;border-radius:10px;background:#000;max-height:420px;object-fit:contain;box-shadow:0 2px 12px rgba(0,0,0,0.12);"
-        ></video>
-        <div style="font-size:10px;color:var(--text-3);line-height:1.5;">Reference video for campaign concept, visual tone and product styling direction.</div>
+        <div style="position:relative;width:100%;padding-bottom:177.78%;background:#111;border-radius:10px;overflow:hidden;box-shadow:0 2px 14px rgba(0,0,0,0.15);">
+          <video
+            src="campaign-overview.mp4"
+            controls
+            playsinline
+            preload="metadata"
+            style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;"
+          ></video>
+        </div>
+        <div style="font-size:10px;color:var(--text-3);line-height:1.5;">Reference for visual tone, product styling and pacing.</div>
       </div>
     </div>
   </div>`;
