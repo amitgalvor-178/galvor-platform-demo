@@ -378,6 +378,21 @@ body { display:flex; background:var(--bg); color:var(--text); font-family:-apple
 .cf-pb { width:32px; height:4px; border-radius:2px; background:rgba(0,0,0,0.08); transition:background 0.4s; }
 .cf-pb.done { background:var(--green); }
 .cf-pb.active { background:var(--accent); }
+
+/* ─── AUDIT TRAIL ─── */
+#cf-audit-trail { display:flex; align-items:center; gap:0; padding:0 44px; background:#fafaf8; border-bottom:1px solid var(--border); overflow-x:auto; flex-shrink:0; min-height:0; max-height:0; overflow:hidden; transition:max-height 0.4s ease,padding 0.3s; }
+#cf-audit-trail.visible { max-height:54px; padding:8px 44px; }
+#cf-audit-trail::-webkit-scrollbar { height:2px; }
+.cf-at-node { display:flex; align-items:center; gap:0; flex-shrink:0; }
+.cf-at-dot { width:22px; height:22px; border-radius:50%; background:var(--green); display:flex; align-items:center; justify-content:center; font-size:9px; color:#fff; font-weight:700; flex-shrink:0; }
+.cf-at-dot.pend { background:rgba(0,0,0,0.1); color:var(--text-3); }
+.cf-at-line { width:28px; height:2px; background:var(--green); flex-shrink:0; }
+.cf-at-line.pend { background:rgba(0,0,0,0.08); }
+.cf-at-info { display:flex; flex-direction:column; margin-left:6px; margin-right:4px; }
+.cf-at-label { font-size:9.5px; font-weight:700; color:var(--text); white-space:nowrap; }
+.cf-at-time { font-size:8.5px; color:var(--text-3); font-weight:500; white-space:nowrap; }
+.cf-at-sep { font-size:10px; color:rgba(0,0,0,0.12); margin:0 6px; }
+
 .cf-chat { flex:1; overflow-y:auto; padding:24px 44px; display:flex; flex-direction:column; gap:0; }
 .cf-chat::-webkit-scrollbar { width:4px; }
 .cf-chat::-webkit-scrollbar-thumb { background:rgba(0,0,0,0.1); border-radius:2px; }
@@ -1048,6 +1063,9 @@ body { display:flex; background:var(--bg); color:var(--text); font-family:-apple
       </div>
     </div>
 
+    <!-- Audit Trail -->
+    <div id="cf-audit-trail"></div>
+
     <!-- Chat thread -->
     <div class="cf-chat" id="cf-chat"></div>
 
@@ -1086,6 +1104,32 @@ body { display:flex; background:var(--bg); color:var(--text); font-family:-apple
       </div>
     </div>
     <div style="flex:1;overflow-y:auto;padding:28px 44px;display:flex;flex-direction:column;gap:18px;">
+
+      <!-- AI Insights Strip -->
+      <div style="background:linear-gradient(135deg,rgba(196,135,12,0.06),rgba(124,51,0,0.04));border:1px solid rgba(196,135,12,0.2);border-radius:14px;padding:14px 18px;display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px;">
+          <div style="width:22px;height:22px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:700;flex-shrink:0;">G</div>
+          <span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);">Galvor AI · Campaign Insights</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <div style="display:flex;align-items:flex-start;gap:7px;background:#fff;border:1px solid rgba(196,135,12,0.15);border-radius:9px;padding:8px 11px;flex:1;min-width:180px;">
+            <span style="font-size:14px;flex-shrink:0;">🏆</span>
+            <div><div style="font-size:10.5px;font-weight:700;color:var(--text);margin-bottom:2px;">Comparison V1 is your winner</div><div style="font-size:10px;color:var(--text-2);">4.1× RoAS — highest of all 3 creatives. Exactly what the Brand DNA predicted.</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:7px;background:#fff;border:1px solid rgba(196,135,12,0.15);border-radius:9px;padding:8px 11px;flex:1;min-width:180px;">
+            <span style="font-size:14px;flex-shrink:0;">📉</span>
+            <div><div style="font-size:10.5px;font-weight:700;color:var(--text);margin-bottom:2px;">Discovery V1 underperforming</div><div style="font-size:10px;color:var(--text-2);">2.1× RoAS. ₹0.9L spend with low returns — candidate for pause.</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:7px;background:#fff;border:1px solid rgba(196,135,12,0.15);border-radius:9px;padding:8px 11px;flex:1;min-width:180px;">
+            <span style="font-size:14px;flex-shrink:0;">🎯</span>
+            <div><div style="font-size:10.5px;font-weight:700;color:var(--text);margin-bottom:2px;">Hook rate 5pp above benchmark</div><div style="font-size:10px;color:var(--text-2);">38% vs 33% industry avg. Arjun's opening frame is converting attention.</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:7px;background:#fff;border:1px solid rgba(196,135,12,0.15);border-radius:9px;padding:8px 11px;flex:1;min-width:180px;">
+            <span style="font-size:14px;flex-shrink:0;">💡</span>
+            <div><div style="font-size:10.5px;font-weight:700;color:var(--text);margin-bottom:2px;">Reallocate ₹0.9L to Comparison</div><div style="font-size:10px;color:var(--text-2);">Projected blended RoAS lifts from 3.2× → 3.8× if Discovery budget shifts.</div></div>
+          </div>
+        </div>
+      </div>
 
       <!-- Period selector -->
       <div style="display:flex;align-items:center;justify-content:space-between;">
@@ -4468,13 +4512,47 @@ let cfAssigned = new Set();
 
 const cfStepMeta = [
   null,
-  { title: 'Campaign Setup',         lbl: 'Step 1 of 6' },
-  { title: 'Concept Generation',     lbl: 'Step 2 of 6' },
-  { title: 'Creator Recommendations', lbl: 'Step 3 of 6' },
-  { title: 'Brief Generation',       lbl: 'Step 4 of 6' },
-  { title: 'Performance Prediction', lbl: 'Step 5 of 6' },
-  { title: 'Campaign Ready',         lbl: 'Step 6 of 6' },
+  { title: 'Campaign Setup',          lbl: 'Step 1 of 6', auditLabel: 'Campaign Setup',         auditDetail: 'Answers locked in' },
+  { title: 'Concept Generation',      lbl: 'Step 2 of 6', auditLabel: 'Concepts Generated',      auditDetail: '5 AI concepts ready' },
+  { title: 'Creator Recommendations', lbl: 'Step 3 of 6', auditLabel: 'Creators Scanned',        auditDetail: '847 → 3 matched' },
+  { title: 'Brief Generation',        lbl: 'Step 4 of 6', auditLabel: 'Brief Generated',         auditDetail: 'Creator brief sent' },
+  { title: 'Performance Prediction',  lbl: 'Step 5 of 6', auditLabel: 'Content Reviewed',        auditDetail: 'Edit notes delivered' },
+  { title: 'Campaign Ready',          lbl: 'Step 6 of 6', auditLabel: 'Campaign Live',           auditDetail: 'Tracking active' },
 ];
+
+// ── Audit Trail ───────────────────────────────────────────────────
+const _cfAuditLog = [];
+function cfNow() {
+  const d = new Date();
+  return d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
+}
+function cfLogAudit(step) {
+  const meta = cfStepMeta[step]; if (!meta) return;
+  if (_cfAuditLog.find(e => e.step === step)) return; // no dupes
+  _cfAuditLog.push({ step, label: meta.auditLabel, detail: meta.auditDetail, time: cfNow() });
+  cfRenderAudit();
+}
+function cfRenderAudit() {
+  const trail = document.getElementById('cf-audit-trail');
+  if (!trail) return;
+  trail.classList.add('visible');
+  const total = 6;
+  let html = '';
+  for (let i = 1; i <= total; i++) {
+    const entry = _cfAuditLog.find(e => e.step === i);
+    const done = !!entry;
+    const isLast = i === total;
+    html += `<div class="cf-at-node">
+      <div class="cf-at-dot${done ? '' : ' pend'}">${done ? '✓' : i}</div>
+      <div class="cf-at-info">
+        <span class="cf-at-label" style="${done ? '' : 'color:var(--text-3);'}">${done ? entry.label : (cfStepMeta[i] ? cfStepMeta[i].auditLabel : '')}</span>
+        ${done ? `<span class="cf-at-time">${entry.detail} · ${entry.time}</span>` : ''}
+      </div>
+    </div>`;
+    if (!isLast) html += `<div class="cf-at-line${done ? '' : ' pend'}"></div>`;
+  }
+  trail.innerHTML = html;
+}
 
 function cfSetHeader(n) {
   const meta = cfStepMeta[n];
@@ -4487,6 +4565,9 @@ function cfSetHeader(n) {
     const pb = document.getElementById('cfp' + i);
     if (pb) pb.classList.toggle('active', i <= n);
   }
+  // Log completed steps (log step n-1 when moving to n, log final on 6)
+  if (n > 1) cfLogAudit(n - 1);
+  if (n === 6) setTimeout(() => cfLogAudit(6), 1200);
 }
 const cfChat = () => document.getElementById('cf-chat');
 const cfBz   = () => document.getElementById('cf-bottom-zone');
@@ -5799,7 +5880,7 @@ window.cfConfirmAndGenerateBrief = async function() {
     `<div class="cf-brief-del">${d}</div>`
   ).join('');
 
-  briefWrap.innerHTML = `<div class="cf-brief" style="max-width:720px;">
+  briefWrap.innerHTML = `<div class="cf-brief" style="max-width:960px;">
     <div class="cf-brief-hd">
       <div>
         <div class="cf-brief-for">Creator Brief</div>
@@ -5808,45 +5889,59 @@ window.cfConfirmAndGenerateBrief = async function() {
       </div>
       <div class="cf-brief-aib">AI Generated</div>
     </div>
-    <div class="cf-brief-bd">
+    <div style="display:grid;grid-template-columns:1fr 260px;gap:0;align-items:start;">
+      <div class="cf-brief-bd" style="border-right:1px solid var(--border);">
 
-      <div style="padding-bottom:4px;">
-        <div class="cf-brief-sn">01 · CAMPAIGN OVERVIEW</div>
-        <div class="cf-brief-ln"><span class="lbl">Product:</span> MaisonX ${cfBuild.answers.product || 'Giza Cotton Shirt'}</div>
-        <div class="cf-brief-ln"><span class="lbl">Concept:</span> ${bc.concept}</div>
-        <div class="cf-brief-ln"><span class="lbl">Angle:</span> ${bc.angle}</div>
-        <div class="cf-brief-ln"><span class="lbl">Tone:</span> ${bc.tone}</div>
-        <div class="cf-brief-ln"><span class="lbl">Platform:</span> ${bc.platform}</div>
-        <div class="cf-brief-ln"><span class="lbl">Duration:</span> ${bc.duration}</div>
-      </div>
-
-      <div style="padding-bottom:4px;">
-        <div class="cf-brief-sn">02 · VISUAL BRIEF</div>
-        <div class="cf-brief-ln"><span class="lbl">Lighting:</span> ${bc.palette}</div>
-        <div class="cf-brief-ln"><span class="lbl">Wardrobe:</span> ${bc.wardrobe}</div>
-        <div class="cf-brief-ln"><span class="lbl">Music:</span> ${bc.music}</div>
-      </div>
-
-      <div>
-        <div class="cf-brief-sn">03 · FULL SCRIPT — SCENE BY SCENE</div>
-        <div style="display:flex;flex-direction:column;gap:8px;margin-top:6px;">
-          ${scenesHtml}
+        <div style="padding-bottom:4px;">
+          <div class="cf-brief-sn">01 · CAMPAIGN OVERVIEW</div>
+          <div class="cf-brief-ln"><span class="lbl">Product:</span> MaisonX ${cfBuild.answers.product || 'Giza Cotton Shirt'}</div>
+          <div class="cf-brief-ln"><span class="lbl">Concept:</span> ${bc.concept}</div>
+          <div class="cf-brief-ln"><span class="lbl">Angle:</span> ${bc.angle}</div>
+          <div class="cf-brief-ln"><span class="lbl">Tone:</span> ${bc.tone}</div>
+          <div class="cf-brief-ln"><span class="lbl">Platform:</span> ${bc.platform}</div>
+          <div class="cf-brief-ln"><span class="lbl">Duration:</span> ${bc.duration}</div>
         </div>
-      </div>
 
-      <div style="padding-bottom:4px;">
-        <div class="cf-brief-sn">04 · DIRECTION NOTES</div>
-        <div class="cf-brief-ln" style="line-height:1.7;">${bc.direction}</div>
-      </div>
-
-      <div style="border-top:1px solid var(--border);padding-top:12px;">
-        <div class="cf-brief-sn">05 · DELIVERABLES</div>
-        <div style="display:flex;flex-direction:column;gap:5px;margin-top:6px;">
-          ${delivHtml}
+        <div style="padding-bottom:4px;">
+          <div class="cf-brief-sn">02 · VISUAL BRIEF</div>
+          <div class="cf-brief-ln"><span class="lbl">Lighting:</span> ${bc.palette}</div>
+          <div class="cf-brief-ln"><span class="lbl">Wardrobe:</span> ${bc.wardrobe}</div>
+          <div class="cf-brief-ln"><span class="lbl">Music:</span> ${bc.music}</div>
         </div>
-        <div class="cf-brief-ln" style="margin-top:8px;"><span class="lbl">Deadline:</span> ${bc.deadline || '5 working days from receipt'}</div>
+
+        <div>
+          <div class="cf-brief-sn">03 · FULL SCRIPT — SCENE BY SCENE</div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:6px;">
+            ${scenesHtml}
+          </div>
+        </div>
+
+        <div style="padding-bottom:4px;">
+          <div class="cf-brief-sn">04 · DIRECTION NOTES</div>
+          <div class="cf-brief-ln" style="line-height:1.7;">${bc.direction}</div>
+        </div>
+
+        <div style="border-top:1px solid var(--border);padding-top:12px;">
+          <div class="cf-brief-sn">05 · DELIVERABLES</div>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:6px;">
+            ${delivHtml}
+          </div>
+          <div class="cf-brief-ln" style="margin-top:8px;"><span class="lbl">Deadline:</span> ${bc.deadline || '5 working days from receipt'}</div>
+        </div>
+
       </div>
 
+      <!-- Video panel -->
+      <div style="padding:14px;display:flex;flex-direction:column;gap:10px;position:sticky;top:0;">
+        <div style="font-size:9px;font-weight:700;letter-spacing:0.12em;color:var(--text-3);text-transform:uppercase;margin-bottom:2px;">Campaign Overview Video</div>
+        <video
+          src="campaign-overview.mp4"
+          controls
+          playsinline
+          style="width:100%;border-radius:10px;background:#000;max-height:420px;object-fit:contain;box-shadow:0 2px 12px rgba(0,0,0,0.12);"
+        ></video>
+        <div style="font-size:10px;color:var(--text-3);line-height:1.5;">Reference video for campaign concept, visual tone and product styling direction.</div>
+      </div>
     </div>
   </div>`;
   await cfEl(briefWrap, 500);
